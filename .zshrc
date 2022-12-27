@@ -120,4 +120,6 @@ export PATH=$CEDEV/bin:$PATH
 eval $(thefuck --alias)
 
 
+#cargo bins
+export PATH=/home/maxha/.cargo/bin:$PATH
 
