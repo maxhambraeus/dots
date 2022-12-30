@@ -10,7 +10,7 @@ else
   let curl_exists=expand('curl')
 endif
 
-let g:vim_bootstrap_langs = "python"
+let g:vim_bootstrap_langs = "python, rust"
 let g:vim_bootstrap_editor = "nvim"				" nvim or vim
 let g:vim_bootstrap_theme = "gruvbox"
 let g:vim_bootstrap_frams = ""
@@ -81,6 +81,28 @@ Plug 'honza/vim-snippets'
 "Plug 'davidhalter/jedi-vim'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
+" rust
+" Vim racer
+Plug 'racer-rust/vim-racer'
+
+" syntastic
+Plug 'vim-syntastic/syntastic'
+
+" Rust.vim
+Plug 'rust-lang/rust.vim'
+
+" Async.vim
+Plug 'prabirshrestha/async.vim'
+
+" Vim lsp
+Plug 'prabirshrestha/vim-lsp'
+
+" Asyncomplete.vim
+Plug 'prabirshrestha/asyncomplete.vim'
+
+" Asyncomplete lsp.vim
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
 
 "*****************************************************************************
 "*****************************************************************************
@@ -143,9 +165,9 @@ let g:session_command_aliases = 1
 "*****************************************************************************
 "" Visual Settings
 "*****************************************************************************
-syntax on
+syntax enable
 set ruler
-set number
+set number relativenumber
 
 let no_buffers_menu=1
 colorscheme gruvbox
@@ -171,7 +193,7 @@ else
 
   " IndentLine
   let g:indentLine_enabled = 1
-  let g:indentLine_concealcursor = 0
+  let g:indentLine_concealcursor = "nc"
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
 
@@ -217,6 +239,11 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
 
+
+
+" close ycm preview window afer insertion
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
 "*****************************************************************************
 "" Abbreviations
 "*****************************************************************************
@@ -252,7 +279,7 @@ let Grep_Skip_Dirs = '.git node_modules'
 
 " terminal emulation
 nnoremap <silent> <leader>sh :terminal<CR>
-
+tnoremap <Esc> <C-\><C-n>
 
 "*****************************************************************************
 "" Commands
@@ -464,7 +491,14 @@ let g:airline#extensions#virtualenv#enabled = 1
 " Syntax highlight
 let python_highlight_all = 1
 
+" rust
+" Vim racer
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
+let g:syntastic_rust_checkers = ['cargo']
 
 "*****************************************************************************
 "*****************************************************************************
