@@ -299,4 +299,4 @@ bindsym $mod+r mode "resize"
 
 
 include /etc/sway/config.d/*
-exec_always waybar
+exec_always killall waybar && waybar
