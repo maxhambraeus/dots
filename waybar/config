@@ -50,7 +50,6 @@
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""],
-	"full-at": 88 //works
     },
     "network": {
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
