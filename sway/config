@@ -95,6 +95,9 @@ exec batsignal -w 30 -c 15 -d 5 -W "Low battery." -C "Charge your laptop." -D "I
 #start lxqt polkit agent for authentication things
 exec lxqt-policykit-agent
 
+#start signal, the messaging app
+exec signal-desktop --start-in-tray
+
 
 #get rid of window borders
 default_border none
@@ -299,4 +302,4 @@ bindsym $mod+r mode "resize"
 
 
 include /etc/sway/config.d/*
-exec_always killall waybar && waybar
+exec killall waybar & sleep 1 & waybar
