@@ -96,7 +96,7 @@ exec batsignal -w 30 -c 15 -d 5 -W "Low battery." -C "Charge your laptop." -D "I
 exec lxqt-policykit-agent
 
 #start signal, the messaging app
-exec signal-desktop --start-in-tray
+exec signal-desktop --start-in-tray --use-tray-icon
 
 
 #get rid of window borders
@@ -167,6 +167,9 @@ bindsym $mod+l exec swaylock
 
 #ejecting cd
 bindsym XF86Eject exec eject
+
+#dismiss notifications
+bindsym $mod+Escape exec makoctl dismiss
 
 #
 # Moving around:
@@ -301,5 +304,5 @@ bindsym $mod+r mode "resize"
 #}
 
 
-include /etc/sway/config.d/*
 exec killall waybar & sleep 1 & waybar
+include /etc/sway/config.d/*
