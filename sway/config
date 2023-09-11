@@ -304,5 +304,9 @@ bindsym $mod+r mode "resize"
 #}
 
 
-exec killall waybar & sleep 1 & waybar
+bar {
+    swaybar_command waybar
+    hidden_state hide
+    mode hide
+}
 include /etc/sway/config.d/*
