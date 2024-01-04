@@ -4,13 +4,6 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-#####TODO: 
-#fix title border DONE
-#fix wallpaper DONE???? 
-#fix waybar DONE
-#maybe kb backlight
-# make gaps
-
 
 ### Variables
 #
@@ -75,6 +68,7 @@ input "1452:595:bcm5974" {
 	tap enabled
 	drag enabled
 	scroll_factor 0.2
+	natural_scroll disabled
 }
 
 #start nm-applet
