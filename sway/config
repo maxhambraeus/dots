@@ -4,13 +4,6 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-#####TODO: 
-#fix title border DONE
-#fix wallpaper DONE???? 
-#fix waybar DONE
-#maybe kb backlight
-# make gaps
-
 
 ### Variables
 #
@@ -75,6 +68,7 @@ input "1452:595:bcm5974" {
 	tap enabled
 	drag enabled
 	scroll_factor 0.2
+	natural_scroll disabled
 }
 
 #start nm-applet
@@ -94,6 +88,9 @@ exec batsignal -w 30 -c 15 -d 5 -W "Low battery." -C "Charge your laptop." -D "I
 
 #start lxqt polkit agent for authentication things
 exec lxqt-policykit-agent
+
+#start signal, the messaging app
+exec signal-desktop --start-in-tray --use-tray-icon
 
 
 #get rid of window borders
@@ -164,6 +161,9 @@ bindsym $mod+l exec swaylock
 
 #ejecting cd
 bindsym XF86Eject exec eject
+
+#dismiss notifications
+bindsym $mod+Escape exec makoctl dismiss
 
 #
 # Moving around:
@@ -298,5 +298,9 @@ bindsym $mod+r mode "resize"
 #}
 
 
+bar {
+    swaybar_command waybar
+    hidden_state hide
+    mode hide
+}
 include /etc/sway/config.d/*
-exec_always killall waybar && waybar
