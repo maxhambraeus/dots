@@ -103,6 +103,9 @@ Plug 'prabirshrestha/asyncomplete.vim'
 " Asyncomplete lsp.vim
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
+" Vimtex
+Plug 'lervag/vimtex'
+
 
 "*****************************************************************************
 "*****************************************************************************
@@ -500,6 +503,11 @@ au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 let g:syntastic_rust_checkers = ['cargo']
 
+
+" Latex
+
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_compiler_engine = 'lualatex'
 "*****************************************************************************
 "*****************************************************************************
 
