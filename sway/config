@@ -62,7 +62,11 @@ exec swayidle -w before-sleep 'swaylock'
 # Read `man 5 sway-input` for more information about this section.
 
 
-input * xkb_layout "se"
+input * {
+	xkb_layout "se"
+	xkb_variant "nodeadkeys" 
+}
+# I do not know why nodeadkeys wrokds here, but it does. Now I can't type carets above letters though
 
 input "1452:595:bcm5974" {
 	dwt enabled
