@@ -61,6 +61,7 @@ exec swayidle -w before-sleep 'swaylock'
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
+
 input * xkb_layout "se"
 
 input "1452:595:bcm5974" {
@@ -161,6 +162,7 @@ bindsym $mod+l exec swaylock
 
 #ejecting cd
 bindsym XF86Eject exec eject
+# eject cd is bound to delete using evremap, config in /etc/evremap.toml
 
 #dismiss notifications
 bindsym $mod+Escape exec makoctl dismiss
