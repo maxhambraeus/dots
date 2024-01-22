@@ -223,7 +223,7 @@ require('lazy').setup({
   {
     'preservim/nerdtree',
     config = function()
-      vim.keymap.set('n', '<F2>', ':NERDTree<CR>')
+      vim.keymap.set('n', '<leader><F2>', ':NERDTree<CR>', {desc = "Show NERDTree"})
     end
   },
 
@@ -246,7 +246,7 @@ require('lazy').setup({
   {
     'mbbill/undotree',
     config = function ()
-      vim.keymap.set('n', '<F5>', vim.cmd.UndotreeToggle)
+      vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle, {desc = "Toggle undo tree"})
     end
 
   },
