@@ -221,6 +221,36 @@ require('lazy').setup({
 
   },
   {
+    'preservim/nerdtree',
+    config = function()
+      vim.keymap.set('n', '<F2>', ':NERDTree<CR>')
+    end
+  },
+
+  {
+    'nvimdev/hlsearch.nvim',
+    config = function ()
+      require('hlsearch').setup()
+    end
+  },
+  {
+    'rust-lang/rust.vim',
+  },
+
+  {
+    'm4xshen/autoclose.nvim',
+     config = function ()
+      require('autoclose').setup()
+     end
+  },
+  {
+    'mbbill/undotree',
+    config = function ()
+      vim.keymap.set('n', '<F5>', vim.cmd.UndotreeToggle)
+    end
+
+  },
+  {
     'mrcjkb/rustaceanvim',
   },
   {
@@ -285,7 +315,7 @@ require('lazy').setup({
 -- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
-vim.o.hlsearch = false
+-- vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
@@ -337,6 +367,15 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+-- Tabs and stuff
+vim.keymap.set('n', '<Tab>', 'gt')
+vim.keymap.set('n', '<S-Tab>', 'gT')
+vim.keymap.set('n', '<S-t>', ':tabnew<CR>', {silent = true})
+
+-- These mappings make it so that search results end up in the center of the screen
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -347,6 +386,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+
+
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
