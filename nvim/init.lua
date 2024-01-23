@@ -22,6 +22,7 @@ Kickstart.nvim is a template for your own configuration.
   - https://neovim.io/doc/user/lua-guide.html
 
 
+
 Kickstart Guide:
 
 I have left several `:help X` comments throughout the init.lua
@@ -88,7 +89,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -113,7 +114,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -192,6 +193,7 @@ require('lazy').setup({
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
+    lazy = false,
     priority = 1000,
     config = function()
       vim.cmd.colorscheme 'onedark'
@@ -209,6 +211,14 @@ require('lazy').setup({
         component_separators = '|',
         section_separators = '',
       },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'encoding', 'fileformat', 'filetype', { getWords } },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
+      },
     },
   },
 
@@ -223,35 +233,39 @@ require('lazy').setup({
   {
     'preservim/nerdtree',
     config = function()
-      vim.keymap.set('n', '<leader><F2>', ':NERDTree<CR>', {desc = "Show NERDTree"})
+      vim.keymap.set('n', '<leader><F2>', ':NERDTree<CR>', { desc = "Show NERDTree" })
     end
   },
 
   {
     'nvimdev/hlsearch.nvim',
-    config = function ()
+    config = function()
       require('hlsearch').setup()
     end
   },
   {
-    'rust-lang/rust.vim',
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {} -- this is equalent to setup({}) function
   },
-
+  --[[
   {
     'm4xshen/autoclose.nvim',
      config = function ()
       require('autoclose').setup()
      end
   },
+--]]
   {
     'mbbill/undotree',
-    config = function ()
-      vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle, {desc = "Toggle undo tree"})
+    config = function()
+      vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
     end
 
   },
   {
     'mrcjkb/rustaceanvim',
+    ft = { "rust" },
   },
   {
     -- Add indentation guides even on blank lines
@@ -370,7 +384,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Tabs and stuff
 vim.keymap.set('n', '<Tab>', 'gt')
 vim.keymap.set('n', '<S-Tab>', 'gT')
-vim.keymap.set('n', '<S-t>', ':tabnew<CR>', {silent = true})
+vim.keymap.set('n', '<S-t>', ':tabnew<CR>', { silent = true })
 
 -- These mappings make it so that search results end up in the center of the screen
 vim.keymap.set('n', 'n', 'nzzzv')
@@ -388,6 +402,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 
+-- wordcount function for statusbar
+local function getWords()
+  return tostring(vim.fn.wordcount().words)
+end
 
 
 -- [[ Configure Telescope ]]
@@ -583,10 +601,9 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
 
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
+  nmap('<leader>f', function()
+    vim.lsp.buf.format { async = true }
+  end, "Format current buffer with LSP")
 end
 
 -- document existing key chains
@@ -636,6 +653,20 @@ local servers = {
       -- diagnostics = { disable = { 'missing-fields' } },
     },
   },
+}
+
+-- configure rustaceanvim
+vim.g.rustaceanvim = {
+  server = {
+    on_attach = on_attach,
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave = {
+          command = "clippy"
+        },
+      },
+    },
+  }
 }
 
 -- Setup neovim lua configuration
@@ -717,4 +748,3 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-
