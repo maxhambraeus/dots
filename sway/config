@@ -70,7 +70,7 @@ input * {
 
 input "1452:595:bcm5974" {
 	dwt enabled
-	tap enabled
+	tap disabled
 	drag enabled
 	scroll_factor 0.2
 	natural_scroll disabled
