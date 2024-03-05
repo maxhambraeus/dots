@@ -4,6 +4,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="/home/maxha/.oh-my-zsh"
 
+#HELLO
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -105,7 +106,6 @@ alias la='ls -a'
 alias c++='c++ -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Wall -ansi -std=c++20'
 alias vi='vim'
 alias filesizes='du -sh *(D) | sort -h'
-alias tm-mappack='/home/maxha/Scripts/tm-mappack/tm-mappack.sh'
 
 #python venv stuff
 export PATH="/home/maxha/.local/bin:$PATH"
@@ -113,13 +113,12 @@ export WORKON_HOME=$HOME/code/python/.virtualenvs
 export PROJECT_HOME=$HOME/code/python/
 source /home/maxha/.local/bin/virtualenvwrapper.sh
 
-#ce dev shit i dont know 
-
-export CEDEV=/home/maxha/Downloads/CEdev
-export PATH=$CEDEV/bin:$PATH
-eval $(thefuck --alias)
-
-
 #cargo bins
 export PATH=/home/maxha/.cargo/bin:$PATH
+
+#zoxide
+eval "$(zoxide init --cmd cd zsh)"
+
+#using local config aswell
+source $HOME/zshrc/.zshrc_machine_specific
 
